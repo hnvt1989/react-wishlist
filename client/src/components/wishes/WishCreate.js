@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createWish } from '../../actions';
 import WishForm from './WishForm';
 
-class StreamCreate extends React.Component {
+class WishCreate extends React.Component {
   onSubmit = formValues => {
     this.props.createWish(formValues);
   };
@@ -21,4 +21,4 @@ class StreamCreate extends React.Component {
 export default connect(
   null,
   { createWish }
-)(StreamCreate);
+)(WishCreate);

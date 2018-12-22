@@ -4,7 +4,7 @@ import {
   SIGN_IN,
   SIGN_OUT,
   CREATE_WISH,
-  FETCH_STREAMS,
+  FETCH_WISHES,
   FETCH_WISH,
   DELETE_WISH,
   EDIT_WISH
@@ -34,7 +34,7 @@ export const createWish = formValues => async (dispatch, getState) => {
 export const fetchWishes = () => async dispatch => {
   const response = await wishes.get('/wishes');
 
-  dispatch({ type: FETCH_STREAMS, payload: response.data });
+  dispatch({ type: FETCH_WISHES, payload: response.data });
 };
 
 export const fetchWish= id => async dispatch => {
