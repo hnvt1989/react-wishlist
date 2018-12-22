@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import StreamCreate from './streams/StreamCreate';
-import StreamEdit from './streams/StreamEdit';
-import StreamDelete from './streams/StreamDelete';
-import StreamList from './streams/StreamList';
-import StreamShow from './streams/StreamShow';
+import WishCreate from './wishes/WishCreate';
+import WishEdit from './wishes/WishEdit';
+import WishDelete from './wishes/WishDelete';
+import WishList from './wishes/WishList';
+import WishShow from './wishes/WishShow';
 import Header from './Header';
 import history from '../history';
 
@@ -15,11 +15,11 @@ const App = () => {
         <div>
           <Header />
           <Switch>
-            <Route path="/" exact component={StreamList} />
-            <Route path="/streams/new" exact component={StreamCreate} />
-            <Route path="/streams/edit/:id" exact component={StreamEdit} />
-            <Route path="/streams/delete/:id" exact component={StreamDelete} />
-            <Route path="/streams/:id" exact component={StreamShow} />
+            <Route path="/" exact component={WishList} />
+            <Route path="/wishes/new" exact component={WishCreate} />
+            <Route path="/wishes/edit/:id" exact component={WishEdit} />
+            <Route path="/wishes/delete/:id" exact component={WishDelete} />
+            <Route path="/wishes/:id" exact component={WishShow} />
           </Switch>
         </div>
       </Router>

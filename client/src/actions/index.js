@@ -1,13 +1,13 @@
-import streams from '../apis/streams';
+import wishes from '../apis/wishes';
 import history from '../history';
 import {
   SIGN_IN,
   SIGN_OUT,
-  CREATE_STREAM,
+  CREATE_WISH,
   FETCH_STREAMS,
-  FETCH_STREAM,
-  DELETE_STREAM,
-  EDIT_STREAM
+  FETCH_WISH,
+  DELETE_WISH,
+  EDIT_WISH
 } from './types';
 
 export const signIn = userId => {
@@ -23,36 +23,36 @@ export const signOut = () => {
   };
 };
 
-export const createStream = formValues => async (dispatch, getState) => {
+export const createWish = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  const response = await streams.post('/streams', { ...formValues, userId });
+  const response = await wishes.post('/wishes', { ...formValues, userId });
 
-  dispatch({ type: CREATE_STREAM, payload: response.data });
+  dispatch({ type: CREATE_WISH, payload: response.data });
   history.push('/');
 };
 
-export const fetchStreams = () => async dispatch => {
-  const response = await streams.get('/streams');
+export const fetchWishes = () => async dispatch => {
+  const response = await wishes.get('/wishes');
 
   dispatch({ type: FETCH_STREAMS, payload: response.data });
 };
 
-export const fetchStream = id => async dispatch => {
-  const response = await streams.get(`/streams/${id}`);
+export const fetchWish= id => async dispatch => {
+  const response = await wishes.get(`/wishes/${id}`);
 
-  dispatch({ type: FETCH_STREAM, payload: response.data });
+  dispatch({ type: FETCH_WISH, payload: response.data });
 };
 
-export const editStream = (id, formValues) => async dispatch => {
-  const response = await streams.patch(`/streams/${id}`, formValues);
+export const editWish = (id, formValues) => async dispatch => {
+  const response = await wishes.patch(`/wishes/${id}`, formValues);
 
-  dispatch({ type: EDIT_STREAM, payload: response.data });
+  dispatch({ type: EDIT_WISH, payload: response.data });
   history.push('/');
 };
 
-export const deleteStream = id => async dispatch => {
-  await streams.delete(`/streams/${id}`);
+export const deleteWish = id => async dispatch => {
+  await wishes.delete(`/wishes/${id}`);
 
-  dispatch({ type: DELETE_STREAM, payload: id });
+  dispatch({ type: DELETE_WISH, payload: id });
   history.push('/');
 };

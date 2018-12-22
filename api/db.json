@@ -1,18 +1,18 @@
 {
   "streams": [
     {
-      "title": "My Stream",
-      "description": "This is a great stream.",
+      "title": "My Wish",
+      "description": "This is a great wish.",
       "id": 1
     },
     {
-      "title": "Other Stream",
-      "description": "Here's some stream",
+      "title": "Other Wish",
+      "description": "Here's some wish",
       "id": 2
     },
     {
       "title": "Me Streaming Component Reuse!",
-      "description": "This stream is about refactoring!!!",
+      "description": "This wish is about refactoring!!!",
       "id": 4
     }
   ]

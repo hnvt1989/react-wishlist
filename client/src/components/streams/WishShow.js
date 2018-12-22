@@ -1,9 +1,9 @@
 import React from 'react';
 import flv from 'flv.js';
 import { connect } from 'react-redux';
-import { fetchStream } from '../../actions';
+import { fetchWish } from '../../actions';
 
-class StreamShow extends React.Component {
+class WishShow extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +13,7 @@ class StreamShow extends React.Component {
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    this.props.fetchStream(id);
+    this.props.fetchWish(id);
     this.buildPlayer();
   }
 
@@ -26,7 +26,7 @@ class StreamShow extends React.Component {
   }
 
   buildPlayer() {
-    if (this.player || !this.props.stream) {
+    if (this.player || !this.props.wish) {
       return;
     }
 
@@ -40,11 +40,11 @@ class StreamShow extends React.Component {
   }
 
   render() {
-    if (!this.props.stream) {
+    if (!this.props.wish) {
       return <div>Loading...</div>;
     }
 
-    const { title, description } = this.props.stream;
+    const { title, description } = this.props.wish;
 
     return (
       <div>
@@ -57,10 +57,10 @@ class StreamShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[ownProps.match.params.id] };
+  return { wish: state.streams[ownProps.match.params.id] };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchStream }
-)(StreamShow);
+  { fetchWish }
+)(WishShow);

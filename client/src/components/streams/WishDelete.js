@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal';
 import history from '../../history';
-import { fetchStream, deleteStream } from '../../actions';
+import { fetchWish, deleteWish } from '../../actions';
 
-class StreamDelete extends React.Component {
+class WishDelete extends React.Component {
   componentDidMount() {
-    this.props.fetchStream(this.props.match.params.id);
+    this.props.fetchWish(this.props.match.params.id);
   }
 
   renderActions() {
@@ -16,7 +16,7 @@ class StreamDelete extends React.Component {
     return (
       <React.Fragment>
         <button
-          onClick={() => this.props.deleteStream(id)}
+          onClick={() => this.props.deleteWish(id)}
           className="ui button negative"
         >
           Delete
@@ -29,12 +29,12 @@ class StreamDelete extends React.Component {
   }
 
   renderContent() {
-    if (!this.props.stream) {
-      return 'Are you sure you want to delete this stream?';
+    if (!this.props.wish) {
+      return 'Are you sure you want to delete this wish?';
     }
 
-    return `Are you sure you want to delete the stream with title: ${
-      this.props.stream.title
+    return `Are you sure you want to delete the wish with title: ${
+      this.props.wish.title
     }`;
   }
 
@@ -51,10 +51,10 @@ class StreamDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[ownProps.match.params.id] };
+  return { wish: state.streams[ownProps.match.params.id] };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchStream, deleteStream }
-)(StreamDelete);
+  { fetchWish, deleteWish }
+)(WishDelete);

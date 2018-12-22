@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchStreams } from '../../actions';
+import { fetchWishes } from '../../actions';
 
-class StreamList extends React.Component {
+class WishList extends React.Component {
   componentDidMount() {
-    this.props.fetchStreams();
+    this.props.fetchWishes();
   }
 
-  renderAdmin(stream) {
-    if (stream.userId === this.props.currentUserId) {
+  renderAdmin(wish) {
+    if (wish.userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
-          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
+          <Link to={`/wishes/edit/${wish.id}`} className="ui button primary">
             Edit
           </Link>
           <Link
-            to={`/streams/delete/${stream.id}`}
+            to={`/wishes/delete/${wish.id}`}
             className="ui button negative"
           >
             Delete
@@ -27,16 +27,16 @@ class StreamList extends React.Component {
   }
 
   renderList() {
-    return this.props.streams.map(stream => {
+    return this.props.wishes.map(wish => {
       return (
-        <div className="item" key={stream.id}>
-          {this.renderAdmin(stream)}
+        <div className="item" key={wish.id}>
+          {this.renderAdmin(wish)}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/${stream.id}`} className="header">
-              {stream.title}
+            <Link to={`/wishes/${wish.id}`} className="header">
+              {wish.title}
             </Link>
-            <div className="description">{stream.description}</div>
+            <div className="description">{wish.description}</div>
           </div>
         </div>
       );
@@ -47,8 +47,8 @@ class StreamList extends React.Component {
     if (this.props.isSignedIn) {
       return (
         <div style={{ textAlign: 'right' }}>
-          <Link to="/streams/new" className="ui button primary">
-            Create Stream
+          <Link to="/wishes/new" className="ui button primary">
+            Create Wish
           </Link>
         </div>
       );
@@ -58,7 +58,7 @@ class StreamList extends React.Component {
   render() {
     return (
       <div>
-        <h2>Streams</h2>
+        <h2>Wishes</h2>
         <div className="ui celled list">{this.renderList()}</div>
         {this.renderCreate()}
       </div>
@@ -68,7 +68,7 @@ class StreamList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    streams: Object.values(state.streams),
+    wishes: Object.values(state.wishes),
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn
   };
@@ -76,5 +76,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchStreams }
-)(StreamList);
+  { fetchWishes }
+)(WishList);
