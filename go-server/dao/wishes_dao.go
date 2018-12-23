@@ -3,6 +3,7 @@ package dao
 import (
 	"log"
 
+	. "github.com/mlabouardy/movies-restapi/models"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -18,6 +19,7 @@ const (
 	COLLECTION = "wishes"
 )
 
+// Establish a connection to database
 func (m *WishesDAO) Connect() {
 	session, err := mgo.Dial(m.Server)
 	if err != nil {
@@ -26,28 +28,33 @@ func (m *WishesDAO) Connect() {
 	db = session.DB(m.Database)
 }
 
+// Find list of movies
 func (m *WishesDAO) FindAll() ([]Wish, error) {
-	var wishes []Wish
-	err := db.C(COLLECTION).Find(bson.M{}).All(&wishes)
-	return wishes, err
+	var movies []Wish
+	err := db.C(COLLECTION).Find(bson.M{}).All(&movies)
+	return movies, err
 }
 
+// Find a wish by its id
 func (m *WishesDAO) FindById(id string) (Wish, error) {
 	var wish Wish
 	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&wish)
 	return wish, err
 }
 
+// Insert a wish into database
 func (m *WishesDAO) Insert(wish Wish) error {
 	err := db.C(COLLECTION).Insert(&wish)
 	return err
 }
 
+// Delete an existing wish
 func (m *WishesDAO) Delete(wish Wish) error {
 	err := db.C(COLLECTION).Remove(&wish)
 	return err
 }
 
+// Update an existing wish
 func (m *WishesDAO) Update(wish Wish) error {
 	err := db.C(COLLECTION).UpdateId(wish.ID, &wish)
 	return err
