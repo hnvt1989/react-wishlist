@@ -8,9 +8,9 @@ import (
 	"gopkg.in/mgo.v2/bson"
 
 	"github.com/gorilla/mux"
-	. "github.com/mlabouardy/wishes-restapi/config"
-	. "github.com/mlabouardy/wishes-restapi/dao"
-	. "github.com/mlabouardy/wishes-restapi/models"
+	. "github.com/hnvt1989/react-wishlist/go-server/config"
+	. "github.com/hnvt1989/react-wishlist/go-server/dao"
+	. "github.com/hnvt1989/react-wishlist/go-server/models"
 )
 
 var config = Config{}
