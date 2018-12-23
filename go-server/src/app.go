@@ -1,3 +1,8 @@
+// Salutation : here you tell us what Salutation is
+// Printer : what is this?
+// Greet : describe what this function does
+// CreateMessage : describe what this function does
+
 package main
 
 import (
