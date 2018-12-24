@@ -25,7 +25,6 @@ func enableCors(w *http.ResponseWriter) {
 
 // GET list of wishes
 func AllWishesEndPoint(w http.ResponseWriter, r *http.Request) {
-	// enableCors(&w)
 	wishes, err := dao.FindAll()
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
@@ -36,7 +35,6 @@ func AllWishesEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // GET a wish by its ID
 func FindWishEndpoint(w http.ResponseWriter, r *http.Request) {
-	// enableCors(&w)
 	params := mux.Vars(r)
 	wish, err := dao.FindById(params["id"])
 	if err != nil {
@@ -48,7 +46,6 @@ func FindWishEndpoint(w http.ResponseWriter, r *http.Request) {
 
 // POST a new wish
 func CreateWishEndPoint(w http.ResponseWriter, r *http.Request) {
-	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -65,7 +62,6 @@ func CreateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // PUT update an existing wish
 func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
-	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -81,7 +77,6 @@ func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // DELETE an existing wish
 func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
-	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -97,7 +92,6 @@ func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
 
 func PreflightAddResource(w http.ResponseWriter, r *http.Request) {
 	var empty []Wish
-	// enableCors(&w)
 	respondWithJson(w, http.StatusOK, empty)
 }
 
@@ -130,7 +124,8 @@ func main() {
 	r.HandleFunc("/wishes", UpdateWishEndPoint).Methods("PUT")
 	r.HandleFunc("/wishes", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
-	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS") //prelfight
+	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS")      //prelfight
+	r.HandleFunc("/wishes/{id}", PreflightAddResource).Methods("OPTIONS") //prelfight for DELETE
 	if err := http.ListenAndServe(":3003", r); err != nil {
 		log.Fatal(err)
 	}
