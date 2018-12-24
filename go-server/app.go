@@ -19,7 +19,7 @@ var dao = WishesDAO{}
 // Enable CORS
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Headers", "origin, content-type, accept")
+	(*w).Header().Set("Access-Control-Allow-Headers", "origin, content-type, accept, accept-encoding, accept-language, connection, host, referer, user-agent")
 	(*w).Header().Set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
 }
 
