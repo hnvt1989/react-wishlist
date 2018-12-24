@@ -79,6 +79,8 @@ func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	var wish Wish
+
+	//TODO: DELETE should handle just ID, do not expect payload
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
@@ -90,7 +92,7 @@ func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
 	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
-func PreflightAddResource(w http.ResponseWriter, r *http.Request) {
+func PreflightHandler(w http.ResponseWriter, r *http.Request) {
 	var empty []Wish
 	respondWithJson(w, http.StatusOK, empty)
 }
@@ -124,8 +126,8 @@ func main() {
 	r.HandleFunc("/wishes/{id}", UpdateWishEndPoint).Methods("PATCH")
 	r.HandleFunc("/wishes/{id}", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
-	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS")      //prelfight
-	r.HandleFunc("/wishes/{id}", PreflightAddResource).Methods("OPTIONS") //prelfight for DELETE, PATCH
+	r.HandleFunc("/wishes", PreflightHandler).Methods("OPTIONS")      //prelfight
+	r.HandleFunc("/wishes/{id}", PreflightHandler).Methods("OPTIONS") //prelfight for DELETE, PATCH
 	if err := http.ListenAndServe(":3003", r); err != nil {
 		log.Fatal(err)
 	}

@@ -43,15 +43,16 @@ export const fetchWish= id => async dispatch => {
   dispatch({ type: FETCH_WISH, payload: response.data });
 };
 
-export const editWish = (id, formValues) => async dispatch => {
-  const response = await wishes.patch(`/wishes/${id}`, formValues);
+export const editWish = (id, formValues) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  const response = await wishes.patch(`/wishes/${id}`, { ...formValues, id, userId}); //TODO: Save just with formsValues ?
 
   dispatch({ type: EDIT_WISH, payload: response.data });
   history.push('/');
 };
 
 export const deleteWish = id => async dispatch => {
-  await wishes.delete(`/wishes/${id}`);
+  await wishes.delete(`/wishes/${id}`, {data: { id}});
 
   dispatch({ type: DELETE_WISH, payload: id });
   history.push('/');

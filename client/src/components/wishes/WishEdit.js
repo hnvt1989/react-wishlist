@@ -22,7 +22,7 @@ class WishEdit extends React.Component {
       <div>
         <h3>Edit a Stream</h3>
         <WishForm
-          initialValues={_.pick(this.props.wish, 'title', 'description')}
+          initialValues={_.pick(this.props.wish, 'name', 'description')}
           onSubmit={this.onSubmit}
         />
       </div>
