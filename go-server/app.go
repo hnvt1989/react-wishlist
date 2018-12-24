@@ -121,8 +121,8 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/wishes", AllWishesEndPoint).Methods("GET")
 	r.HandleFunc("/wishes", CreateWishEndPoint).Methods("POST")
-	r.HandleFunc("/wishes", UpdateWishEndPoint).Methods("PATCH")
-	r.HandleFunc("/wishes", DeleteWishEndPoint).Methods("DELETE")
+	r.HandleFunc("/wishes/{id}", UpdateWishEndPoint).Methods("PATCH")
+	r.HandleFunc("/wishes/{id}", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
 	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS")      //prelfight
 	r.HandleFunc("/wishes/{id}", PreflightAddResource).Methods("OPTIONS") //prelfight for DELETE, PATCH
