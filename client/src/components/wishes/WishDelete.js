@@ -34,7 +34,7 @@ class WishDelete extends React.Component {
     }
 
     return `Are you sure you want to delete the wish with title: ${
-      this.props.wish.title
+      this.props.wish.name
     }`;
   }
 

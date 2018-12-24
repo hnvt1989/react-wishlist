@@ -34,7 +34,7 @@ class WishList extends React.Component {
           <i className="large middle aligned icon camera" />
           <div className="content">
             <Link to={`/wishes/${wish.id}`} className="header">
-              {wish.title}
+              {wish.name}
             </Link>
             <div className="description">{wish.description}</div>
           </div>

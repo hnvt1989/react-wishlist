@@ -33,7 +33,7 @@ class WishForm extends React.Component {
         onSubmit={this.props.handleSubmit(this.onSubmit)}
         className="ui form error"
       >
-        <Field name="title" component={this.renderInput} label="Enter Title" />
+        <Field name="name" component={this.renderInput} label="Enter Name" />
         <Field
           name="description"
           component={this.renderInput}
@@ -48,8 +48,8 @@ class WishForm extends React.Component {
 const validate = formValues => {
   const errors = {};
 
-  if (!formValues.title) {
-    errors.title = 'You must enter a title';
+  if (!formValues.name) {
+    errors.name = 'You must enter a title';
   }
 
   if (!formValues.description) {

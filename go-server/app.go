@@ -16,8 +16,15 @@ import (
 var config = Config{}
 var dao = WishesDAO{}
 
+// Enable CORS
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Headers", "origin, content-type, accept")
+}
+
 // GET list of wishes
 func AllWishesEndPoint(w http.ResponseWriter, r *http.Request) {
+	// enableCors(&w)
 	wishes, err := dao.FindAll()
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
@@ -28,6 +35,7 @@ func AllWishesEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // GET a wish by its ID
 func FindWishEndpoint(w http.ResponseWriter, r *http.Request) {
+	// enableCors(&w)
 	params := mux.Vars(r)
 	wish, err := dao.FindById(params["id"])
 	if err != nil {
@@ -39,6 +47,7 @@ func FindWishEndpoint(w http.ResponseWriter, r *http.Request) {
 
 // POST a new wish
 func CreateWishEndPoint(w http.ResponseWriter, r *http.Request) {
+	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -55,6 +64,7 @@ func CreateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // PUT update an existing wish
 func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
+	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -70,6 +80,7 @@ func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // DELETE an existing wish
 func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
+	// enableCors(&w)
 	defer r.Body.Close()
 	var wish Wish
 	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
@@ -83,6 +94,12 @@ func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
 	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
+func PreflightAddResource(w http.ResponseWriter, r *http.Request) {
+	var empty []Wish
+	// enableCors(&w)
+	respondWithJson(w, http.StatusOK, empty)
+}
+
 func respondWithError(w http.ResponseWriter, code int, msg string) {
 	respondWithJson(w, code, map[string]string{"error": msg})
 }
@@ -90,6 +107,7 @@ func respondWithError(w http.ResponseWriter, code int, msg string) {
 func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	response, _ := json.Marshal(payload)
 	w.Header().Set("Content-Type", "application/json")
+	enableCors(&w)
 	w.WriteHeader(code)
 	w.Write(response)
 }
@@ -111,6 +129,7 @@ func main() {
 	r.HandleFunc("/wishes", UpdateWishEndPoint).Methods("PUT")
 	r.HandleFunc("/wishes", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
+	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS")//prelfight
 	if err := http.ListenAndServe(":3003", r); err != nil {
 		log.Fatal(err)
 	}
