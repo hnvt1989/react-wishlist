@@ -20,6 +20,7 @@ var dao = WishesDAO{}
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 	(*w).Header().Set("Access-Control-Allow-Headers", "origin, content-type, accept")
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
 }
 
 // GET list of wishes
@@ -129,7 +130,7 @@ func main() {
 	r.HandleFunc("/wishes", UpdateWishEndPoint).Methods("PUT")
 	r.HandleFunc("/wishes", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
-	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS")//prelfight
+	r.HandleFunc("/wishes", PreflightAddResource).Methods("OPTIONS") //prelfight
 	if err := http.ListenAndServe(":3003", r); err != nil {
 		log.Fatal(err)
 	}
