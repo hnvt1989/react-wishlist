@@ -52,7 +52,8 @@ export const editWish = (id, formValues) => async (dispatch, getState) => {
 };
 
 export const deleteWish = id => async dispatch => {
-  await wishes.delete(`/wishes/${id}`, {data: { id}});
+  //await wishes.delete(`/wishes/${id}`, {data: { id}});
+  await wishes.delete(`/wishes/${id}`);
 
   dispatch({ type: DELETE_WISH, payload: id });
   history.push('/');

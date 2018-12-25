@@ -78,18 +78,28 @@ func UpdateWishEndPoint(w http.ResponseWriter, r *http.Request) {
 // DELETE an existing wish
 func DeleteWishEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var wish Wish
+	params := mux.Vars(r)
+	err := dao.Delete(params["id"])
 
-	//TODO: DELETE should handle just ID, do not expect payload
-	if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
-		return
-	}
-	if err := dao.Delete(wish); err != nil {
+	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
+	//defer r.Body.Close()
+	//var wish Wish
+
+	//TODO: DELETE should handle just ID, do not expect payload
+	// if err := json.NewDecoder(r.Body).Decode(&wish); err != nil {
+	// 	respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+	// 	return
+	// }
+	// if err := dao.Delete(wish.id); err != nil {
+	// 	respondWithError(w, http.StatusInternalServerError, err.Error())
+	// 	return
+	// }
+	//respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
 func PreflightHandler(w http.ResponseWriter, r *http.Request) {
