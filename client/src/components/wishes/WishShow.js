@@ -33,8 +33,8 @@ class WishShow extends React.Component {
     const { id } = this.props.match.params;
     this.player = flv.createPlayer({
       type: 'flv',
-      //url: `http://ec2-18-237-112-208.us-west-2.compute.amazonaws.com:8000/live/${id}.flv`
-      url: `http://localhost:8000/live/${id}.flv`
+      url: `http://ec2-18-237-112-208.us-west-2.compute.amazonaws.com:8000/live/${id}.flv`
+      //url: `http://localhost:8000/live/${id}.flv`
     });
     this.player.attachMediaElement(this.videoRef.current);
     this.player.load();

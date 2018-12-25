@@ -49,10 +49,6 @@ func (m *WishesDAO) Insert(wish Wish) error {
 }
 
 // Delete an existing wish
-// func (m *WishesDAO) Delete(wish Wish) error {
-// 	err := db.C(COLLECTION).Remove(&wish)
-// 	return err
-// }
 func (m *WishesDAO) Delete(id string) error {
 	var wish Wish
 	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&wish)
