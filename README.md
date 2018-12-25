@@ -13,5 +13,6 @@
  
  BUG:
  1. after EDIT the list renders but with errors on console (something weird with list prop 'key')
- 2. DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
+ 2. [DONE] DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
+ 3. Delete invalid Wish object throwing error in the rest api server
  
