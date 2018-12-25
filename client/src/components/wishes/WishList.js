@@ -31,7 +31,7 @@ class WishList extends React.Component {
       return (
         <div className="item" key={wish.id}>
           {this.renderAdmin(wish)}
-          <i className="large middle aligned icon camera" />
+          <i className="large middle aligned icon gift" />
           <div className="content">
             <Link to={`/wishes/${wish.id}`} className="header">
               {wish.name}
