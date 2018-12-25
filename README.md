@@ -14,8 +14,7 @@
  2. send wish list via email
  3. web-crawler to find discounts on wish items ?
  4. email sharing friends about the discount on your wish list
- 5. DONE . rest api with go-lang instead of json web server
- 
+
  BUG:
  1. after EDIT the list renders but with errors on console (something weird with list prop 'key')
  2. [DONE] DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
