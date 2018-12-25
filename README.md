@@ -1,7 +1,7 @@
 ﻿# react-wishlist
  demo: http://ec2-18-237-112-208.us-west-2.compute.amazonaws.com:3000/
  
- Simple online wish list. Uses React-Redux for FRONT END, Go-lang for Rest API, Mongodb for db storage. 
+ Simple online wish list. Uses React-Redux for FRONT END, Go-lang for Rest API, Mongodb for db storage, Google oAuth for login authentication
  
  TODO: 
  
