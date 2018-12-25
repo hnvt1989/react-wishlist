@@ -58,7 +58,7 @@ class WishShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { wish: state.streams[ownProps.match.params.id] };
+  return { wish: state.wishes[ownProps.match.params.id] };
 };
 
 export default connect(
