@@ -9,15 +9,14 @@
  4. Google oAuth for login authentication
  
  TODO: 
- 
- 1. make wish sharing available to friends
- 2. send wish list via email
- 3. web-crawler to find discounts on wish items ?
- 4. email sharing friends about the discount on your wish list
+ - Add items to a wishlist
+ - make wish sharing available to friends
+ - send wish list via email
+ - web-crawler to find discounts on wish items ?
+ - email sharing friends about the discount on your wish list
 
  BUG:
- 1. Click on the List throws consoles error. 
- 2. after EDIT the list renders but with errors on console (something weird with list prop 'key')
- 3. [DONE] DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
- 4. Delete invalid Wish object throwing error in the rest api server
+ - after EDIT the list renders but with errors on console (something weird with list prop 'key')
+ - [DONE] DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
+ - Delete invalid Wish object throwing error in the rest api server
  
