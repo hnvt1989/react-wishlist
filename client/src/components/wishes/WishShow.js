@@ -2,15 +2,8 @@ import React from 'react';
 //import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchWish } from '../../actions';
-import { Link } from 'react-router-dom';
 
 class WishShow extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.videoRef = React.createRef();
-  // }
-
   componentDidMount() {
     const { id } = this.props.match.params;
 
@@ -44,16 +37,6 @@ class WishShow extends React.Component {
             </div>
           </div>
         </div>
-
-        //   <div className="item" key={item.id}>
-        //   <i className="large middle aligned icon gift" />
-        //   <div className="content">
-        //     <Link to={`/wishes/${item.id}`} className="header">
-        //       {item.name}
-        //     </Link>
-        //     <div className="description">{item.description}</div>
-        //   </div>
-        // </div>
       );
     });
   }
