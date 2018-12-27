@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 
 class WishForm extends React.Component {
   renderError({ error, touched }) {
@@ -28,6 +28,7 @@ class WishForm extends React.Component {
   };
 
   render() {
+    //console.log(this.props.items);
     return (
       <form
         onSubmit={this.props.handleSubmit(this.onSubmit)}
@@ -39,9 +40,58 @@ class WishForm extends React.Component {
           component={this.renderInput}
           label="Enter Description"
         />
-        <button className="ui button primary">Submit</button>
+        <FieldArray name="items" component={this.renderItems} />
+        <div>
+          <button className="ui button primary">Submit</button>
+        </div>
       </form>
     );
+  }
+
+  renderItems = ({ items, meta: { error, submitFailed } }) => {
+    return (
+      <ul>
+        <li>
+          {/* <button type="button" onClick={() => items.push()}>
+            Add Item
+      </button> */}
+        </li>
+        {items.map((item, index) => (
+          <li key={index}>
+            <button
+              type="button"
+              title="Remove Item"
+              onClick={() => items.remove(index)}
+            />
+
+            <h4>Member #{index + 1}</h4>
+            <Field
+              name={`${item}.name`}
+              type="text"
+              component={this.renderInput}
+              label="Item name"
+            />
+            <Field
+              name={`${item}.url`}
+              type="text"
+              component={this.renderInput}
+              label="Url"
+            />
+
+            {/* <div className="ui segment">
+            <Field name={item.name} component={this.renderInput} label="Name" />
+          </div>
+          <div className="ui segment">
+            <Field name={item.note} component={this.renderInput} label="Note" />
+          </div>
+          <div className="ui segment">
+            <Field name={item.url} component={this.renderInput} label="Url" />
+          </div> */}
+          </li>
+        ))}
+      </ul>
+    );
+
   }
 }
 
@@ -61,5 +111,10 @@ const validate = formValues => {
 
 export default reduxForm({
   form: 'wishForm',
-  validate
+  validate,
+  initialValues: {
+    name: 'hey',
+    description: 'sup',
+    items: [{id: 1, name: 'john', description: 'Doe', url: 'hey' }]
+  }
 })(WishForm);

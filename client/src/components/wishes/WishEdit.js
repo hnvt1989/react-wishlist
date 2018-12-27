@@ -18,11 +18,14 @@ class WishEdit extends React.Component {
       return <div>Loading...</div>;
     }
 
+    // let initialVals = _.pick(this.props.wish, 'name', 'description', 'items');
+    // initialValues={initialVals}
+
+    //initialVals.items = [{'name': 'hey'}]
     return (
       <div>
         <h3>Edit the list</h3>
         <WishForm
-          initialValues={_.pick(this.props.wish, 'name', 'description', 'items')}
           onSubmit={this.onSubmit}
         />
       </div>
