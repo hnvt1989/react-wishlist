@@ -1,0 +1,10 @@
+db = connect("localhost:27017/wishes_db")
+
+db.wishes.drop()
+
+db.wishes.insertMany( [
+{"name":"1st","description":"1st","userId":"112450104384688887132", "items": [ { "id": 1, "name": "Walkabout 3.0 Spinner Luggage", "note": "Macys Christmas Sale", "url": "https://www.macys.com/shop/product/closeout-travelpro-walkabout-3.0-spinner-luggage-created-for-macys?ID=2583219&CategoryID=25037&swatchColor=Dark%20Purple#fn=sp%3D1%26spc%3D1724%26ruleId%3D78%7CBOOST%20SAVED%20SET%26searchPass%3DmatchNone%26slotId%3D1" }, { "id": 2, "name": "Whitening Ex Cream 50ml", "note": "Amazon", "url": "https://www.amazon.com/gp/product/B01D6DHJEW?pf_rd_p=c2945051-950f-485c-b4df-15aac5223b10&pf_rd_r=WM4Q7SGJS7XMD1JR1XP1" } ] },
+{"name":"2nd","description":"2nd","userId":"112450104384688887132", "items": [ { "id": 1, "name": "C", "note": "c", "url": "" }, { "id": 2, "name": "D", "note": "d", "url": "" } ] },
+{"name":"3rd","description":"3rd","userId":"112450104384688887132", "items": [ { "id": 1, "name": "E", "note": "e", "url": "" }, { "id": 2, "name": "F", "note": "f", "url": "" } ] },
+{"name":"0-th","description":"0-th","userId":"", "items": [ { "id": 1, "name": "0", "note": "0", "url": "" }, { "id": 2, "name": "0", "note": "0", "url": "" } ] }
+]);
