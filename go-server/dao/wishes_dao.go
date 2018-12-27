@@ -53,7 +53,7 @@ func (m *WishesDAO) Delete(id string) error {
 	var wish Wish
 	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&wish)
 
-	if err != nil{
+	if err != nil {
 		return err
 	}
 

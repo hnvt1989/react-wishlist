@@ -20,9 +20,9 @@ class WishEdit extends React.Component {
 
     return (
       <div>
-        <h3>Edit a Stream</h3>
+        <h3>Edit the list</h3>
         <WishForm
-          initialValues={_.pick(this.props.wish, 'name', 'description')}
+          initialValues={_.pick(this.props.wish, 'name', 'description', 'items')}
           onSubmit={this.onSubmit}
         />
       </div>
