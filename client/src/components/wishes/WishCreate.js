@@ -12,7 +12,7 @@ class WishCreate extends React.Component {
     return (
       <div>
         <h3>Create a Wish</h3>
-        <WishForm onSubmit={this.onSubmit} />
+        <WishForm initialValues={{'name': '', 'description': '', 'items': []}} onSubmit={this.onSubmit} />
       </div>
     );
   }

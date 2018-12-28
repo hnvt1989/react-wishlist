@@ -55,12 +55,10 @@ class WishForm extends React.Component {
 
     return (
       <div>
-        <div>
-          <button className="ui button" onClick={() => fields.push()}>
-            Add Item
-          </button>
+        <div className="ui button" onClick={() => fields.push()}>
+          Add Item
         </div>
-        <br/>
+        <br />
         {fields.map((field, index) => (
           <div key={index} className="segment">
             <div className="ui segment">
@@ -84,7 +82,7 @@ class WishForm extends React.Component {
                 label="Note"
               />
               <div className="ui button" title="Remove Item" onClick={() => fields.remove(index)}>
-                Remove Item
+                Remove item
               </div>
             </div>
           </div>
