@@ -28,7 +28,6 @@ class WishForm extends React.Component {
   };
 
   render() {
-    //console.log(this.props.items);
     return (
       <form
         onSubmit={this.props.handleSubmit(this.onSubmit)}
@@ -40,7 +39,7 @@ class WishForm extends React.Component {
           component={this.renderInput}
           label="Enter Description"
         />
-        <FieldArray name="items" component={this.renderItems} />
+        <FieldArray name="items" component={this.renderItems} label="Items" />
         <div>
           <button className="ui button primary">Submit</button>
         </div>
@@ -48,48 +47,47 @@ class WishForm extends React.Component {
     );
   }
 
-  renderItems = ({ items, meta: { error, submitFailed } }) => {
+  renderItems = ({ fields, meta: { error, submitFailed } }) => {
+
+    if (!fields) {
+      return <div>Loading...</div>;
+    }
+
     return (
-      <ul>
-        <li>
-          {/* <button type="button" onClick={() => items.push()}>
-            Add Item
-      </button> */}
-        </li>
-        {items.map((item, index) => (
-          <li key={index}>
-            <button
-              type="button"
-              title="Remove Item"
-              onClick={() => items.remove(index)}
-            />
-
-            <h4>Member #{index + 1}</h4>
-            <Field
-              name={`${item}.name`}
-              type="text"
-              component={this.renderInput}
-              label="Item name"
-            />
-            <Field
-              name={`${item}.url`}
-              type="text"
-              component={this.renderInput}
-              label="Url"
-            />
-
-            {/* <div className="ui segment">
-            <Field name={item.name} component={this.renderInput} label="Name" />
+      <div>
+        <div className="ui button primary center" onClick={() => fields.push()}>
+          Add Item
           </div>
-          <div className="ui segment">
-            <Field name={item.note} component={this.renderInput} label="Note" />
+        
+        {fields.map((field, index) => (
+          <div key={index} className="segment">
+            <div className="ui segment">
+              <h5>Item #{index + 1}</h5>
+              <Field
+                name={`${field}.name`}
+                type="text"
+                component={this.renderInput}
+                label="Item name"
+              />
+              <Field
+                name={`${field}.url`}
+                type="text"
+                component={this.renderInput}
+                label="Url"
+              />
+              <Field
+                name={`${field}.note`}
+                type="text"
+                component={this.renderInput}
+                label="Note"
+              />
+              <div className="ui button negative" title="Remove Item" onClick={() => fields.remove(index)}>
+                Remove Item
+              </div>
+            </div>
           </div>
-          <div className="ui segment">
-            <Field name={item.url} component={this.renderInput} label="Url" />
-          </div> */}
-          </li>
         ))}
-      </ul>
+      </div>
     );
 
   }
@@ -112,9 +110,5 @@ const validate = formValues => {
 export default reduxForm({
   form: 'wishForm',
   validate,
-  initialValues: {
-    name: 'hey',
-    description: 'sup',
-    items: [{id: 1, name: 'john', description: 'Doe', url: 'hey' }]
-  }
+  // fields: ['name', 'description', 'fields']
 })(WishForm);
