@@ -9,7 +9,6 @@
  4. Google oAuth for login authentication
  
  TODO: 
- - Add items to a wishlist
  - make wish sharing available to friends
  - send wish list via email
  - web-crawler to find discounts on wish items ?
@@ -17,6 +16,5 @@
 
  BUG:
  - after EDIT the list renders but with errors on console (something weird with list prop 'key')
- - [DONE] DELETE is NOT working since mongodb is looking for full object match (and client only passes in ID)
  - Delete invalid Wish object throwing error in the rest api server
  
