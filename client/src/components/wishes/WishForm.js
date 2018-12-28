@@ -55,10 +55,12 @@ class WishForm extends React.Component {
 
     return (
       <div>
-        <div className="ui button primary center" onClick={() => fields.push()}>
-          Add Item
-          </div>
-        
+        <div>
+          <button className="ui button" onClick={() => fields.push()}>
+            Add Item
+          </button>
+        </div>
+        <br/>
         {fields.map((field, index) => (
           <div key={index} className="segment">
             <div className="ui segment">
@@ -81,7 +83,7 @@ class WishForm extends React.Component {
                 component={this.renderInput}
                 label="Note"
               />
-              <div className="ui button negative" title="Remove Item" onClick={() => fields.remove(index)}>
+              <div className="ui button" title="Remove Item" onClick={() => fields.remove(index)}>
                 Remove Item
               </div>
             </div>
