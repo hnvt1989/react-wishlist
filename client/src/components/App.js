@@ -4,6 +4,7 @@ import WishCreate from './wishes/WishCreate';
 import WishEdit from './wishes/WishEdit';
 import WishDelete from './wishes/WishDelete';
 import WishList from './wishes/WishList';
+import WishMyList from './wishes/WishMyList';
 import WishShow from './wishes/WishShow';
 import Header from './Header';
 import history from '../history';
@@ -16,6 +17,7 @@ const App = () => {
           <Header />
           <Switch>
             <Route path="/" exact component={WishList} />
+            <Route path="/wishes/mywishes" exact component={WishMyList} />
             <Route path="/wishes/new" exact component={WishCreate} />
             <Route path="/wishes/edit/:id" exact component={WishEdit} />
             <Route path="/wishes/delete/:id" exact component={WishDelete} />

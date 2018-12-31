@@ -4,7 +4,7 @@ import {
   FETCH_WISHES,
   CREATE_WISH,
   EDIT_WISH,
-  DELETE_WISH
+  DELETE_WISH,
 } from '../actions/types';
 
 export default (state = {}, action) => {

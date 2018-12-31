@@ -5,6 +5,7 @@ import {
   SIGN_OUT,
   CREATE_WISH,
   FETCH_WISHES,
+  FETCH_CURRENT_USER_WISHES,
   FETCH_WISH,
   DELETE_WISH,
   EDIT_WISH
@@ -35,6 +36,14 @@ export const fetchWishes = () => async dispatch => {
   const response = await wishes.get('/wishes');
 
   dispatch({ type: FETCH_WISHES, payload: response.data });
+};
+
+export const fetchCurrentUserWishes = () => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  console.log('user id is ' + userId);
+  const response = await wishes.get(`/wishes/userId/${userId}`);
+
+  dispatch({ type: FETCH_CURRENT_USER_WISHES, payload: response.data });
 };
 
 export const fetchWish= id => async dispatch => {
