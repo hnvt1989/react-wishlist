@@ -40,7 +40,6 @@ export const fetchWishes = () => async dispatch => {
 
 export const fetchCurrentUserWishes = () => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  console.log('user id is ' + userId);
   const response = await wishes.get(`/wishes/userId/${userId}`);
 
   dispatch({ type: FETCH_CURRENT_USER_WISHES, payload: response.data });
