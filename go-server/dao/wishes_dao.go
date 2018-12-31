@@ -35,6 +35,12 @@ func (m *WishesDAO) FindAll() ([]Wish, error) {
 	return movies, err
 }
 
+func (m *WishesDAO) FindAllByUserId(userId string) ([]Wish, error) {
+	var movies []Wish
+	err := db.C(COLLECTION).Find(bson.M{"userId": userId}).All(&movies)
+	return movies, err
+}
+
 // Find a wish by its id
 func (m *WishesDAO) FindById(id string) (Wish, error) {
 	var wish Wish

@@ -33,6 +33,16 @@ func AllWishesEndPoint(w http.ResponseWriter, r *http.Request) {
 	respondWithJson(w, http.StatusOK, wishes)
 }
 
+func AllWishesByUserIdEndPoint(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	wishes, err := dao.FindAllByUserId(params["id"])
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondWithJson(w, http.StatusOK, wishes)
+}
+
 // GET a wish by its ID
 func FindWishEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -123,6 +133,7 @@ func main() {
 	r.HandleFunc("/wishes/{id}", UpdateWishEndPoint).Methods("PATCH")
 	r.HandleFunc("/wishes/{id}", DeleteWishEndPoint).Methods("DELETE")
 	r.HandleFunc("/wishes/{id}", FindWishEndpoint).Methods("GET")
+	r.HandleFunc("/wishes/userId={id}", AllWishesByUserIdEndPoint).Methods("GET")
 	r.HandleFunc("/wishes", PreflightHandler).Methods("OPTIONS")      //prelfight
 	r.HandleFunc("/wishes/{id}", PreflightHandler).Methods("OPTIONS") //prelfight for DELETE, PATCH
 	if err := http.ListenAndServe(":3003", r); err != nil {
