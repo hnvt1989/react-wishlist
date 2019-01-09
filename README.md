@@ -1,5 +1,5 @@
 ﻿# react-wishlist
- demo: http://ec2-18-237-112-208.us-west-2.compute.amazonaws.com:3000/
+ demo: http://ec2-52-27-123-98.us-west-2.compute.amazonaws.com:3000/
  
  Simple online wish list. 
  Uses:
